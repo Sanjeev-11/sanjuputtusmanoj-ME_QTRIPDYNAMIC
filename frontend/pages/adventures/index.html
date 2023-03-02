@@ -65,12 +65,13 @@
                     </div>
                     <!-- Category filter (select one or many) -->
                     <div class="filter-bar-tile d-flex align-items-center">
-                        <select class="form-control" id="category-select" onchange="selectCategory(event)">
+                        <select class="form-control"  id="category-select" onchange="selectCategory(event)">
                             <option disabled selected value="">Add Category</option>
                             <option value="Cycling">Cycling Routes</option>
                             <option value="Hillside">Hillside Getaways</option>
                             <option value="Beaches">Serene Beaches</option>
                             <option value="Party">Party Spots</option>
+                            
                         </select>
                         <div class="ms-3" style="color: #0645ad; cursor: pointer" onclick="clearCategory(event)">
                             Clear
@@ -146,6 +147,16 @@
             // TODO: MODULE_FILTERS
             // 1. Change the DOM to show the selected duration filter. Use the provided input event
             // 2. Invoke saveFiltersToLocalStorage here
+            document.getElementById("data").textContent = "";
+            document.getElementById("category-list").textContent = "";
+            let duration = event.target.value;
+            filters["duration"]=(duration);
+            // filters["duration"] = filters["duration"].filter(onlyUnique);
+            generateFilterPillsAndUpdateDOM(filters);
+            let filteredAdventures = filterFunction(adventures, filters);
+            addAdventureToDOM(filteredAdventures);
+            saveFiltersToLocalStorage(filters);
+            
 
         }
 
@@ -154,6 +165,14 @@
             // TODO: MODULE_FILTERS
             // 1. Change the DOM to clear the Duration filter. Refer clearCategory() below
             // 2. Invoke saveFiltersToLocalStorage here
+            document.getElementById("data").textContent = "";
+            // document.getElementById("category-list").textContent = "";
+            document.getElementById("duration-select").selectedIndex = 0;
+            filters["duration"] = "";
+            let filteredAdventures = filterFunction(adventures, filters);
+            addAdventureToDOM(filteredAdventures);
+            saveFiltersToLocalStorage(filters);
+            
 
         }
 
@@ -165,7 +184,7 @@
             document.getElementById("category-list").textContent = "";
 
             let category = event.target.value;
-            document.getElementById("category-select").selectedIndex = 0;
+            // document.getElementById("category-select").selectedIndex = 0;
 
             filters["category"].push(category);
             filters["category"] = filters["category"].filter(onlyUnique);
@@ -177,12 +196,15 @@
 
             // TODO: MODULE_FILTERS
             // 1. Invoke saveFiltersToLocalStorage here
+            saveFiltersToLocalStorage(filters);
+            
         }
 
         //executed when clear button is clicked on category filter dropdown
         function clearCategory(event) {
             document.getElementById("data").textContent = "";
             document.getElementById("category-list").textContent = "";
+            document.getElementById("category-select").selectedIndex = 0;
 
             filters["category"] = [];
             let filteredAdventures = filterFunction(adventures, filters);
@@ -190,6 +212,8 @@
 
             // TODO: MODULE_FILTERS
             // 1. Invoke saveFiltersToLocalStorage here
+            saveFiltersToLocalStorage(filters);
+            
         }
 
         //helper function
