@@ -60,10 +60,10 @@
                         <div id="reservation-panel-available">
                             <form id="myForm" action="" method="">
                                 <label>Name</label>
-                                <input type="text" class="form-control" name="name" required />
+                                <input type="text" class="form-control" name="name" required id="'name-input" />
                                 <br />
                                 <label>Pick a Date</label>
-                                <input type="date" class="form-control" name="date" required />
+                                <input type="date" class="form-control" name="date" required id="date-input" />
                                 <hr />
                                 <div class=" d-flex align-items-center justify-content-between">
                                     <div>
@@ -75,7 +75,7 @@
                                     </div>
                                     <div>
                                         <input type="number" class="form-control" min="1" max="10" value="0"
-                                            name="person" required onkeyup="onPersonsChange(event)"
+                                            name="person"  required onkeyup="onPersonsChange(event)"
                                             style="width: 100px" />
                                     </div>
                                 </div>
